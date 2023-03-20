@@ -1,14 +1,17 @@
 import ballerina/http;
 
-type Greeting record {
-    string 'from;
-    string to;
-    string message;
+type RiskResponse record {
+    boolean hasRisk;
 };
 
+// The `risk` resource is invoked when a request is made to the `/risk` path.
 service / on new http:Listener(8090) {
-    resource function get .(string name) returns Greeting {
-        Greeting greetingMessage = {"from" : "Choreo", "to" : name, "message" : "Welcome to Choreo!"};
-        return greetingMessage;
+    resource function post risk() returns RiskResponse|error? {
+
+        RiskResponse resp = {
+            // hasRisk is true if the country code of the IP address is not the specified country code.
+            hasRisk: true
+        };
+        return resp;
     }
 }
