@@ -1,4 +1,5 @@
 import ballerina/http;
+import ballerina/lang.runtime;
 
 type RiskResponse record {
     boolean hasRisk;
